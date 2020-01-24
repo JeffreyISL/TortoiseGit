@@ -356,6 +356,8 @@ BOOL CRebaseDlg::OnInitDialog()
 	if (GetDlgItem(IDC_REBASE_CONTINUE)->IsWindowEnabled() && m_bRebaseAutoStart)
 		this->PostMessage(WM_COMMAND, MAKELONG(IDC_REBASE_CONTINUE, BN_CLICKED), reinterpret_cast<LPARAM>(GetDlgItem(IDC_REBASE_CONTINUE)->GetSafeHwnd()));
 
+	SetTheme(CTheme::Instance().IsDarkTheme());
+
 	return TRUE;
 }
 // CRebaseDlg message handlers

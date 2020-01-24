@@ -1174,6 +1174,8 @@ BOOL CSyncDlg::OnInitDialog()
 		MoveWindow(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 	}
 
+	SetTheme(CTheme::Instance().IsDarkTheme());
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
