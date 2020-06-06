@@ -1,6 +1,6 @@
 ﻿// TortoiseGit - a Windows shell extension for easy version control
 
-// Copyright (C) 2008-2011, 2016-2017, 2020 - TortoiseGit
+// Copyright (C) 2020 - TortoiseGit
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,25 +18,17 @@
 //
 
 #pragma once
-#include "StandAloneDlg.h"
 
-// CEditGotoDlg dialog
-
-class CEditGotoDlg : public CStandAloneDialog
+class CTGitMFCVisualManager : public CMFCVisualManagerOffice2007
 {
-	DECLARE_DYNAMIC(CEditGotoDlg)
-
 public:
-	CEditGotoDlg(CWnd* pParent = nullptr);   // standard constructor
-	virtual ~CEditGotoDlg();
+	CTGitMFCVisualManager();
+	virtual ~CTGitMFCVisualManager();
+	DECLARE_DYNCREATE(CTGitMFCVisualManager)
 
-// Dialog Data
-	enum { IDD = IDD_GOTODLG };
-
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX) override;    // DDX/DDV support
-
-	DECLARE_MESSAGE_MAP()
-public:
-	DWORD m_LineNumber;
+	virtual void OnUpdateSystemColors() override;
+	virtual void OnFillBarBackground(CDC* pDC, CBasePane* pBar, CRect rectClient, CRect rectClip, BOOL bNCArea = FALSE);
+	virtual BOOL IsOwnerDrawMenuCheck();
+	virtual void OnDrawMenuCheck(CDC* pDC, CMFCToolBarMenuButton* pButton, CRect rect, BOOL bHighlight, BOOL bIsRadio);
+	virtual void OnHighlightMenuItem(CDC* pDC, CMFCToolBarMenuButton* pButton, CRect rect, COLORREF& clrText);
 };
