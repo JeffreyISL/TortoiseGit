@@ -19,12 +19,13 @@
 
 #pragma once
 
-class CTGitMFCVisualManager : public CMFCVisualManagerOffice2007
+class CThemeMFCVisualManager : public CMFCVisualManagerOffice2007
 {
 public:
-	CTGitMFCVisualManager();
-	virtual ~CTGitMFCVisualManager();
-	DECLARE_DYNCREATE(CTGitMFCVisualManager)
+	CThemeMFCVisualManager();
+	virtual ~CThemeMFCVisualManager();
+
+	DECLARE_DYNCREATE(CThemeMFCVisualManager)
 
 	virtual void OnUpdateSystemColors() override;
 	virtual void OnFillBarBackground(CDC* pDC, CBasePane* pBar, CRect rectClient, CRect rectClip, BOOL bNCArea = FALSE);

@@ -195,8 +195,8 @@
     <ClCompile Include="..\Utils\DarkModeHelper.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="CTGitMFCVisualManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Utils\MiscUI\ThemeMFCVisualManager.cpp">
+      <Filter>Utils\MiscUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,8 +395,8 @@
     <ClInclude Include="..\Utils\MiscUI\StandAloneDlg.h">
       <Filter>Utils\MiscUI</Filter>
     </ClInclude>
-    <ClInclude Include="CTGitMFCVisualManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Utils\MiscUI\ThemeMFCVisualManager.h">
+      <Filter>Utils\MiscUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

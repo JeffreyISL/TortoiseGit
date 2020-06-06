@@ -18,67 +18,75 @@
 //
 
 #include "stdafx.h"
-#include "TortoiseGitBlame.h"
-#include "CTGitMFCVisualManager.h"
+#include "ThemeMFCVisualManager.h"
 #include "Theme.h"
-#include <afxcustomizebutton.h>
 
-IMPLEMENT_DYNCREATE(CTGitMFCVisualManager, CMFCVisualManagerOffice2007)
+IMPLEMENT_DYNCREATE(CThemeMFCVisualManager, CMFCVisualManagerOffice2007)
 
-CTGitMFCVisualManager::CTGitMFCVisualManager()
+CThemeMFCVisualManager::CThemeMFCVisualManager()
 {
 	SetStyle(CMFCVisualManagerOffice2007::Office2007_ObsidianBlack);
 }
 
-CTGitMFCVisualManager::~CTGitMFCVisualManager()
+CThemeMFCVisualManager::~CThemeMFCVisualManager()
 {
 }
 
-void CTGitMFCVisualManager::OnUpdateSystemColors()
+void CThemeMFCVisualManager::OnUpdateSystemColors()
 {
 	__super::OnUpdateSystemColors();
 
+	// set the menu fore and back colors
 	m_clrMenuText = CTheme::darkTextColor;
 	m_clrMenuTextDisabled = CTheme::darkDisabledTextColor;
 	m_clrMenuLight = CTheme::darkBkColor;
 	m_brMenuLight.DeleteObject();
 	m_brMenuLight.CreateSolidBrush(m_clrMenuLight);
 
-	m_clrBarGradientLight = CTheme::darkBkColor;
-	m_clrBarGradientDark = m_clrBarGradientLight;
-	m_clrMenuBarGradientLight = CTheme::darkBkColor;
-	m_clrMenuBarGradientDark = CTheme::darkBkColor;
-	m_clrMenuBarGradientVertLight = m_clrMenuBarGradientLight;
-	m_clrMenuBarGradientVertDark = m_clrMenuBarGradientDark;
+	// set the highlighting color of menu entries
+	GetGlobalData()->brHilite.DeleteObject();
+	GetGlobalData()->brHilite.CreateSolidBrush(RGB(65, 65, 65));
 
-	m_clrToolBarGradientDark = m_clrToolBarGradientLight = CTheme::darkBkColor;
-
+	// draw thinner horizontal spacer lines in menues
 	m_clrSeparator2 = CTheme::darkBkColor;
 	m_penSeparator2.DeleteObject();
 	m_penSeparator2.CreatePen(PS_SOLID, 0, m_clrSeparator2);
 
-	GetGlobalData()->brHilite.DeleteObject();
-	GetGlobalData()->brHilite.CreateSolidBrush(RGB(65, 65, 65));
+	// set the empty space menu/toolbar background color
+	m_clrBarGradientLight = CTheme::darkBkColor;
+	m_clrBarGradientDark = m_clrBarGradientLight;
+
+	// set the menu bar background color
+	m_clrMenuBarGradientLight = m_clrBarGradientLight;
+	m_clrMenuBarGradientDark = m_clrMenuBarGradientLight;
+	m_clrMenuBarGradientVertLight = m_clrMenuBarGradientLight;
+	m_clrMenuBarGradientVertDark = m_clrMenuBarGradientDark;
+
+	// use the same color for the toolbar background as for the menu
+	// not used ATM as the icons don't look nice
+	//m_clrToolBarGradientLight = m_clrBarGradientLight;
+	//m_clrToolBarGradientDark = m_clrToolBarGradientLight;
 }
 
-void CTGitMFCVisualManager::OnHighlightMenuItem(CDC* pDC, CMFCToolBarMenuButton* pButton, CRect rect, COLORREF& clrText)
+void CThemeMFCVisualManager::OnHighlightMenuItem(CDC* pDC, CMFCToolBarMenuButton* pButton, CRect rect, COLORREF& clrText)
 {
+	// make use of GetGlobalData()->brHilite for highlighing menu entries
 	CMFCVisualManager::OnHighlightMenuItem(pDC, pButton, rect, clrText);
 }
 
-void CTGitMFCVisualManager::OnDrawMenuCheck(CDC* pDC, CMFCToolBarMenuButton* pButton, CRect rect, BOOL bHighlight, BOOL bIsRadio)
+void CThemeMFCVisualManager::OnDrawMenuCheck(CDC* pDC, CMFCToolBarMenuButton* pButton, CRect rect, BOOL bHighlight, BOOL bIsRadio)
 {
 	CMFCVisualManager::OnDrawMenuCheck(pDC, pButton, rect, bHighlight, bIsRadio);
 }
 
-BOOL CTGitMFCVisualManager::IsOwnerDrawMenuCheck()
+BOOL CThemeMFCVisualManager::IsOwnerDrawMenuCheck()
 {
 	return FALSE;
 }
 
-void CTGitMFCVisualManager::OnFillBarBackground(CDC* pDC, CBasePane* pBar, CRect rectClient, CRect rectClip, BOOL bNCArea)
+void CThemeMFCVisualManager::OnFillBarBackground(CDC* pDC, CBasePane* pBar, CRect rectClient, CRect rectClip, BOOL bNCArea)
 {
-	// don't paint vertical lines on menus
+	// don't paint vertical lines on menues
 	if (pBar->IsKindOf(RUNTIME_CLASS(CMFCPopupMenuBar)))
 	{
 		pDC->FillRect(rectClip, &m_brMenuLight);
